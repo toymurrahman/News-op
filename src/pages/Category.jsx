@@ -10,7 +10,7 @@ const Category = () => {
       <div className="flex  flex-col gap-6">
         {
             news.map((eachNews) => (
-               <NewsCard key={eachNews.news_id} news={eachNews} />
+               <NewsCard key={eachNews._id} news={eachNews} />
             ))
         }
       </div>

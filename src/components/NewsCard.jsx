@@ -1,11 +1,22 @@
-import { FaRegEye, FaStar } from "react-icons/fa";
+import { FaRegEye, FaStar, FaRegBookmark, FaShareAlt } from "react-icons/fa";
 
 const NewsCard = (props = {}) => {
-    const { news } = props || {};
-    const { title, author, rating, total_view, thumbnail_url, details } = news;
-    
+    console.log(props);
+  const { news } = props || {};
+  const { title, author, rating, total_view, thumbnail_url, details } = news;
+  
   return (
-    <div className="card w-full bg-white shadow-lg rounded-xl border">
+    <div className="card w-full bg-white shadow-lg rounded-xl border relative">
+      {/* Top-right Bookmark & Share Buttons */}
+      <div className="absolute top-3 right-3 flex gap-2">
+        <button className="p-2 bg-gray-200 rounded-full hover:bg-gray-300">
+          <FaRegBookmark className="text-gray-700" />
+        </button>
+        <button className="p-2 bg-gray-200 rounded-full hover:bg-gray-300">
+          <FaShareAlt className="text-gray-700" />
+        </button>
+      </div>
+
       {/* Author Info */}
       <div className="flex items-center gap-3 p-4">
         <img
@@ -13,14 +24,20 @@ const NewsCard = (props = {}) => {
           alt={author.name}
           className="w-10 h-10 rounded-full"
         />
-        <div>++
+        <div>
           <h3 className="text-sm font-semibold">{author.name}</h3>
-          <p className="text-xs text-gray-500">{author.published_date.split(" ")[0]}</p>
+          <p className="text-xs text-gray-500">
+            {author.published_date.split(" ")[0]}
+          </p>
         </div>
       </div>
 
       {/* News Image */}
-      <img src={thumbnail_url} alt="news" className="w-11/12 mx-auto h-80  object-cover object-top rounded-t-lg" />
+      <img
+        src={thumbnail_url}
+        alt="news"
+        className="w-11/12 mx-auto h-80 object-cover object-top rounded-t-lg"
+      />
 
       {/* News Details */}
       <div className="p-4">
@@ -30,7 +47,9 @@ const NewsCard = (props = {}) => {
         </p>
 
         {/* Read More */}
-        <button className="text-orange-500 font-semibold mt-2">Read More</button>
+        <button className="text-orange-500 font-semibold mt-2">
+          Read More
+        </button>
 
         {/* Rating & Views */}
         <div className="flex justify-between items-center mt-3">
