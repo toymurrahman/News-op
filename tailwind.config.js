@@ -5,10 +5,14 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        poppins : ["Poppins", "serif"],
+      },
+    },
   },
   plugins: [
-    // eslint-disable-next-line no-undef
+    // eslint-disable-next-line no-undef 
     require('daisyui'),
   ],
 }
