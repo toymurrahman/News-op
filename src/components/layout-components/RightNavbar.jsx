@@ -4,7 +4,7 @@ import SocialLogin from "../SocialLogin";
 
 const RightNavbar = () => {
     return (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col  ml-3 gap-4">
             <div className="socialLogin">
                 <SocialLogin></SocialLogin>
             </div>
