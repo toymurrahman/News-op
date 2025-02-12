@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDzGS8yZr16ynkkhfcRnfsQTHdSMrpCK0E",
-  authDomain: "newswave-84009.firebaseapp.com",
-  projectId: "newswave-84009",
-  storageBucket: "newswave-84009.firebasestorage.app",
-  messagingSenderId: "750189337810",
-  appId: "1:750189337810:web:bbb7993b96edccab6ba10b"
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId,
 };
 
 // Initialize Firebase

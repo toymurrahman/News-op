@@ -9,7 +9,7 @@ const NewsCardContainer = () => {
 
 
 
-  console.log(news);
+
   return (
     <div className="px-4 py-2">
       <header className="mb-4">

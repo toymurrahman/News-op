@@ -1,12 +1,13 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Register = () => {
-  const { createUser, setUser } = useContext(AuthContext);
+  const { createUser, setUser, updateUser } = useContext(AuthContext);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-
     e.preventDefault();
     const formData = new FormData(e.target);
     const name = formData.get("name");
@@ -14,25 +15,31 @@ const Register = () => {
     const photo = formData.get("photo");
     const password = formData.get("password");
 
-    console.log(name, email, photo, password);
+  
 
     createUser(email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         setUser(user);
-        console.log(user);
+        updateUser({
+          displayName: name,
+          photoURL: photo,
+        })
+        .then(() => {
+          navigate("/");
+        }) .catch((error) => {
+          setError(error.code, error.message);
+        });
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+       
+        setError(error.code, error.message);
+       
       });
 
-
-    // const data = Object.fromEntries(formData);
-    // console.log(data);
-  }                   
+   
+  };
   return (
     <div className="flex justify-center items-center min-h-screen ">
       <div className="card bg-base-100 w-full max-w-lg p-10 shrink-0 shadow-2xl   ">
@@ -62,7 +69,6 @@ const Register = () => {
               name="photo"
               placeholder="Enter your photo-url"
               className="input input-bordered"
-             
             />
           </div>
           <div className="form-control">
@@ -103,6 +109,7 @@ const Register = () => {
               </Link>{" "}
             </p>
           </div>
+          {error && <p className="text-red-500 text-sm text-center">ERROR: {error}</p>}
         </form>
       </div>
     </div>
