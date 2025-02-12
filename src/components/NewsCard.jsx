@@ -1,7 +1,8 @@
 import { FaRegEye, FaStar, FaRegBookmark, FaShareAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const NewsCard = (props = {}) => {
-    console.log(props);
+
   const { news } = props || {};
   const { title, author, rating, total_view, thumbnail_url, details } = news;
   
@@ -47,9 +48,9 @@ const NewsCard = (props = {}) => {
         </p>
 
         {/* Read More */}
-        <button className="text-orange-500 font-semibold mt-2">
+        <Link to={`/news/${news._id}`} className="text-orange-500 font-semibold ">
           Read More
-        </button>
+        </Link>
 
         {/* Rating & Views */}
         <div className="flex justify-between items-center mt-3">
