@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import userIcon from "../assets/user.png";
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 
@@ -11,7 +10,7 @@ const Navbar = () => {
  
   return (
     <div className="flex justify-between items-center">
-      <div>  </div>
+      <div> {user?.displayName}   </div>
       <div className="nav space-x-5">
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
@@ -23,7 +22,7 @@ const Navbar = () => {
             user && user?.email ? (     
                 <img className="w-10 rounded-full " src={user?.photoURL} alt="" />   
             ) : (
-              <img src={userIcon} alt="" />
+              <div> </div>
             )
           }
           

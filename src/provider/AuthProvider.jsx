@@ -1,26 +1,29 @@
 import { createContext, useEffect, useState } from "react";
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile, FacebookAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import app from "../firebase/firebase.config";
 
 
+
+// eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext ();
 const auth = getAuth(app);
+
+
 
 const AuthProvider = (props = {}) => {
      const {children} = props || {} ;
      const [user, setUser] = useState(null);
      const [loading, setLoading] = useState(true);
-
+     const googleProvider = new GoogleAuthProvider();
+     const facebookProvider = new FacebookAuthProvider();
  
 
      useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            // if (currentUser) {
+        
                 setUser(currentUser);
                 setLoading(false);
-            // } else {
-                // setUser(null);
-            // }
+         
         });
         // Cleanup subscription on unmount
         return () => unsubscribe();
@@ -46,6 +49,12 @@ const AuthProvider = (props = {}) => {
       const updateUser = (updateData) => {
         return updateProfile(auth.currentUser, updateData);
       }
+      const facebookLogin = () => {
+        return signInWithPopup(auth, facebookProvider);
+        }
+        const googleLogin = () => {
+        return signInWithPopup(auth, googleProvider);   
+        }
     const  authInfo = {
         user,
         setUser,
@@ -53,6 +62,8 @@ const AuthProvider = (props = {}) => {
         loginUser,
         logOut,
         updateUser,
+        googleLogin,
+        facebookLogin,
         loading,
         
         
